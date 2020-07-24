@@ -1,0 +1,31 @@
+.app-header {
+  background-color: rgb(32, 32, 32);
+  color: #fff;
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  .logo {
+    margin-left: 20px;
+  }
+}
+
+.main-section {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 10px;
+
+  .todo-list {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+
+    &>.todo-item p {
+      cursor: pointer;
+    }
+  }
+
+  .completed {
+    text-decoration: line-through;
+  }
+}
