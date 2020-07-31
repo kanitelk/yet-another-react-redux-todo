@@ -9,21 +9,7 @@ class TodoList extends React.Component {
     super(props);
   }
 
-  toggleTodo(id) {
-    console.log(id);
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        } else {
-          return todo;
-        }
-      }),
-    });
-  }
-
   render() {
-    console.log(this.state);
     return (
       <div className="todo-list">
         <h2>Todo List</h2>

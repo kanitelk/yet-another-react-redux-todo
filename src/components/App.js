@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
 import TodoList from "./TodoList/TodoList";
+import AddTodo from "./AddTodo/AddTodo";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       </header>
       <section className="main-section">
         <TodoList />
+        <AddTodo />
       </section>
     </div>
   );

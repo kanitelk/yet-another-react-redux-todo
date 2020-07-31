@@ -1,3 +1,8 @@
+.app {
+  display: flex;
+  flex-flow: column wrap;
+}
+
 .app-header {
   background-color: rgb(32, 32, 32);
   color: #fff;
@@ -13,6 +18,8 @@
 .main-section {
   display: flex;
   flex-flow: column wrap;
+  align-self: center;
+  max-width: 500px;
   margin: 10px;
 
   .todo-list {
