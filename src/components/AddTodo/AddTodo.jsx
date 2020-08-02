@@ -56,7 +56,7 @@ export class AddTodo extends React.Component {
           />
         </div>
 
-        <button type="submit">Create</button>
+        <button disabled={this.state.value.length < 3} type="submit">Create</button>
       </form>
     );
   }

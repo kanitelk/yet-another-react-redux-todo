@@ -1,38 +1,48 @@
 import React from "react";
-import TodoItem from "./TodoItem";
-import Test from "../Test";
 import { connect } from "react-redux";
-import { toggleTodo } from "../../redux/actions/todoActions";
+
+import { fetchInitialTodos, toggleTodo } from "../../redux/actions/todoActions";
+import TodoItem from "./TodoItem";
 
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.getInitialTodos();
+  }
+
   render() {
     return (
       <div className="todo-list">
         <h2>Todo List</h2>
-        {this.props.todos ? this.props.todos.map((item) => (
-          <TodoItem
-            toggler={() => this.props.toggleTodo(item.id)}
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            completed={item.completed}
-          />
-        )) : 'undef'}
+        {this.props.loading ? (
+          <p>loading...</p>
+        ) : (
+          this.props.todos.map((item) => (
+            <TodoItem
+              toggler={() => this.props.toggleTodo(item.id)}
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              completed={item.completed}
+            />
+          ))
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  todos: state
-})
+const mapStateToProps = (state) => ({
+  todos: state.data,
+  loading: state.loading,
+});
 
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(toggleTodo(id))
-})
+const mapDispatchToProps = (dispatch) => ({
+  toggleTodo: (id) => dispatch(toggleTodo(id)),
+  getInitialTodos: () => dispatch(fetchInitialTodos()),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

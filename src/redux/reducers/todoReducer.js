@@ -1,33 +1,50 @@
-import { ADD_TODO, TOGGLE_TODO } from "../actions/types";
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  FETCH_INTITIAL_TODOS_STARTED,
+  FETCH_INITIAL_TODOS_SUCCESS,
+  FETCH_INITIAL_TODOS_FAILED,
+} from "../actions/types";
 
-const initialState = [
-  {
-    id: 1,
-    title: "Todo 1",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Todo 2",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Todo 3",
-    completed: false,
-  },
-];
+const initialState = {
+  data: [],
+  loading: false,
+  error: false,
+};
 
 export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [...state, action.payload];
+      return { ...state, data: [...state.data, action.payload] };
     case TOGGLE_TODO:
-      return state.map((todo) =>
-        todo.id === action.payload
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      );
+      return {
+        ...state,
+        data: state.data.map((todo) =>
+          todo.id === action.payload
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        ),
+      };
+    case FETCH_INTITIAL_TODOS_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_INITIAL_TODOS_SUCCESS: {
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+        error: null,
+      };
+    }
+    case FETCH_INITIAL_TODOS_FAILED: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    }
     default:
       return state;
   }
