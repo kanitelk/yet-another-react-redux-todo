@@ -10,13 +10,6 @@ const Pagination: React.FC<Props> = ({ data, perPage, wrapperClass }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [offset, setOffset] = useState(0);
 
-  //! При добавлении TODO не обновляется список
-
-  useEffect(() => {
-    console.log(data.length);
-    
-  }, [])
-
   const getArrays = () => (
     <div className="pagination-actions">
       {currentPage !== 0 && <button onClick={goPrevPage}>Prev Page</button>}
